@@ -1,0 +1,260 @@
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}
+
+\IEEEoverridecommandlockouts 
+\overrideIEEEmargins
+%\documentclass[letterpaper, 12pt, draftcls, onecolumn]{IEEEtran}
+
+% Mathematical Tools
+\usepackage{amsmath}
+\usepackage{amssymb, amsfonts}
+\usepackage{booktabs} 
+\usepackage{mathtools}
+\usepackage{commath}
+\usepackage{microtype}
+
+%\usepackage{amsthm}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{bm}
+
+\usepackage{eucal}
+
+
+% TIKZ package 
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{every axis/.append style={line width=1pt}}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{shapes, fit, decorations.markings, matrix, plotmarks, positioning, fit, spy, patterns, shadows, calc, backgrounds, arrows.meta}
+
+
+
+% figures
+\usepackage[font=footnotesize,caption=false]{subfig}
+\usepackage{graphicx}
+\usepackage[abs]{overpic}
+
+% input
+\usepackage{inputenc}
+\usepackage[nolist]{acronym}
+\usepackage{siunitx}
+\usepackage{booktabs}
+
+
+% enumerate and equations
+\usepackage{enumerate}
+%\AtBeginEnvironment{align}{\setcounter{subeqn}{0}}% Reset subequation number at start of align
+\newcounter{subeqn} \renewcommand{\thesubeqn}{\theequation\alph{subeqn}}%
+\newcommand{\subeqn}{%
+  \refstepcounter{subeqn}% Step subequation number
+  \tag{\thesubeqn}% Label equation
+}
+
+
+% Theorems
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}{Definition}
+\newtheorem{alg}{Algorithm}[section]
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+\newtheorem{problem}{Problem}
+
+
+% Create shorthand definitions
+\newcommand{\ts}[1]{{\textnormal{#1}}}
+\newcommand{\ie}{\emph{i.e.}\ }
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\cf}{\emph{c.f.}\ }
+\newcommand{\Nset}{\mathbb{N}}
+\newcommand{\Rset}{\mathbb{R}}
+\newcommand{\Cset}{\mathbb{C}}
+\newcommand{\mc}{\mathcal}
+\newcommand{\mb}{\mathbf}
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mf}{\mathfrak}
+\newcommand{\ms}{\mathscr}
+
+\def\vv{\vspace{1mm}}
+\def\vs{\vspace{\baselineskip}}
+\newcommand{\edit}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\diff}[2]{{\frac{d #1}{d #2}}}
+\newcommand{\pdiff}[2]{{\frac{\partial #1}{\partial #2}}}
+
+% Activate selected proofs
+\newif\ifproves
+\provestrue
+
+\allowdisplaybreaks
+
+\begin{acronym}
+	\acro{MPC}{Model Predictive Control}
+	\acro{DMPC}{Distributed Model Predictive Control}
+	\acro{LSS}{Large-Scale System}
+	\acro{mRPI}{minimal Robust Positively Invariant}
+	\acro{QP}{Quadratic Programming}
+	\acro{RCI}{Robust Control Invariant}
+	\acro{RPI}{Robust Positive Invariant}
+	\acro{PnP}{Plug and Play}
+	\acro{OCP}{Optimal Control Problem}
+	\acro{MPC}{Model Predictive Control}
+	\acro{PV}{Photo-voltaic}
+	\acro{DG}{Distributed Generation}
+	\acro{DS}{Distributed Storage}
+	\acro{BIC}{Bounded Integral Controller}
+	\acro{VCS}{Voltage controlled source}
+	\acro{MG}{Microgrid}
+	\acro{OPF}{Optimal Power Flow}
+	\acro{SoC}{State of Charge}
+	\acro{OCP}{Optimal Control Problem}
+	\acro{CPL}{Constant Power Load}		
+\end{acronym}
+%
+\interdisplaylinepenalty=2500
+%
+
+% bibliography
+\usepackage{cite}
+\bibliographystyle{IEEEtran}
+
+
+% Required in the preamble
+% % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% defining the new dimensions and parameters
+\newlength{\hatchspread}
+\newlength{\hatchthickness}
+\newlength{\hatchshift}
+\newcommand{\hatchcolor}{}
+% declaring the keys in tikz
+\tikzset{hatchspread/.code={\setlength{\hatchspread}{#1}},
+         hatchthickness/.code={\setlength{\hatchthickness}{#1}},
+         hatchshift/.code={\setlength{\hatchshift}{#1}},% must be >= 0
+         hatchcolor/.code={\renewcommand{\hatchcolor}{#1}}}
+% setting the default values
+\tikzset{hatchspread=3pt,
+         hatchthickness=0.4pt,
+         hatchshift=0pt,% must be >= 0
+         hatchcolor=black}
+% declaring the pattern
+\pgfdeclarepatternformonly[\hatchspread,\hatchthickness,\hatchshift,\hatchcolor]% variables
+   {nwl}% name
+   {\pgfqpoint{\dimexpr-2\hatchthickness}{\dimexpr-2\hatchthickness}}% lower left corner
+   {\pgfqpoint{\dimexpr\hatchspread+2\hatchthickness}{\dimexpr\hatchspread+2\hatchthickness}}% upper right corner
+   {\pgfqpoint{\dimexpr\hatchspread}{\dimexpr\hatchspread}}% tile size
+   {% shape description
+    \pgfsetlinewidth{\hatchthickness}
+    \pgfpathmoveto{\pgfqpoint{0pt}{\dimexpr\hatchspread+\hatchshift}}
+    \pgfpathlineto{\pgfqpoint{\dimexpr\hatchspread+0.15pt+\hatchshift}{-0.15pt}}
+    \ifdim \hatchshift > 0pt
+      \pgfpathmoveto{\pgfqpoint{0pt}{\hatchshift}}
+      \pgfpathlineto{\pgfqpoint{\dimexpr0.15pt+\hatchshift}{-0.15pt}}
+    \fi
+    \pgfsetstrokecolor{\hatchcolor}
+%    \pgfsetdash{{1pt}{1pt}}{0pt}% dashing cannot work correctly in all situation this way
+    \pgfusepath{stroke}
+   }
+\pgfdeclarepatternformonly[\hatchspread,\hatchthickness,\hatchshift,\hatchcolor]% variables
+   {nwld}% name
+   {\pgfqpoint{\dimexpr-2\hatchthickness}{\dimexpr-2\hatchthickness}}% lower left corner
+   {\pgfqpoint{\dimexpr\hatchspread+2\hatchthickness}{\dimexpr\hatchspread+2\hatchthickness}}% upper right corner
+   {\pgfqpoint{\dimexpr\hatchspread}{\dimexpr\hatchspread}}% tile size
+   {% shape description
+    \pgfsetlinewidth{\hatchthickness}
+    \pgfpathmoveto{\pgfqpoint{0pt}{\dimexpr\hatchspread+\hatchshift}}
+    \pgfpathlineto{\pgfqpoint{\dimexpr\hatchspread+0.15pt+\hatchshift}{-0.15pt}}
+    \ifdim \hatchshift > 0pt
+      \pgfpathmoveto{\pgfqpoint{0pt}{\hatchshift}}
+      \pgfpathlineto{\pgfqpoint{\dimexpr0.15pt+\hatchshift}{-0.15pt}}
+    \fi
+    \pgfsetstrokecolor{\hatchcolor}
+    \pgfsetdash{{1pt}{1pt}}{0pt}% dashing cannot work correctly in all situation this way
+    \pgfusepath{stroke}
+   }
+\pgfdeclarepatternformonly[\hatchspread,\hatchthickness,\hatchshift,\hatchcolor]% variables
+   {nel}% name
+   {\pgfqpoint{\dimexpr-2\hatchthickness}{\dimexpr-2\hatchthickness}}% lower left corner
+   {\pgfqpoint{\dimexpr\hatchspread+2\hatchthickness}{\dimexpr\hatchspread+2\hatchthickness}}% upper right corner
+   {\pgfqpoint{\dimexpr\hatchspread}{\dimexpr\hatchspread}}% tile size
+   {% shape description
+    \pgfsetlinewidth{\hatchthickness}
+    \pgfpathmoveto{\pgfqpoint{\dimexpr\hatchshift-0.15pt}{-0.15pt}}
+    \pgfpathlineto{\pgfqpoint{\dimexpr\hatchspread+0.15pt}{\dimexpr\hatchspread-\hatchshift+0.15pt}}
+    \ifdim \hatchshift > 0pt
+      \pgfpathmoveto{\pgfqpoint{-0.15pt}{\dimexpr\hatchspread-\hatchshift-0.15pt}}
+      \pgfpathlineto{\pgfqpoint{\dimexpr\hatchshift+0.15pt}{\dimexpr\hatchspread+0.15pt}}
+    \fi
+    \pgfsetstrokecolor{\hatchcolor}
+%    \pgfsetdash{{1pt}{1pt}}{0pt}% dashing cannot work correctly in all situation this way
+    \pgfusepath{stroke}
+   }
+\pgfdeclarepatternformonly[\hatchspread,\hatchthickness,\hatchshift,\hatchcolor]% variables
+   {neld}% name
+   {\pgfqpoint{\dimexpr-2\hatchthickness}{\dimexpr-2\hatchthickness}}% lower left corner
+   {\pgfqpoint{\dimexpr\hatchspread+2\hatchthickness}{\dimexpr\hatchspread+2\hatchthickness}}% upper right corner
+   {\pgfqpoint{\dimexpr\hatchspread}{\dimexpr\hatchspread}}% tile size
+   {% shape description
+    \pgfsetlinewidth{\hatchthickness}
+    \pgfpathmoveto{\pgfqpoint{\dimexpr\hatchshift-0.15pt}{-0.15pt}}
+    \pgfpathlineto{\pgfqpoint{\dimexpr\hatchspread+0.15pt}{\dimexpr\hatchspread-\hatchshift+0.15pt}}
+    \ifdim \hatchshift > 0pt
+      \pgfpathmoveto{\pgfqpoint{-0.15pt}{\dimexpr\hatchspread-\hatchshift-0.15pt}}
+      \pgfpathlineto{\pgfqpoint{\dimexpr\hatchshift+0.15pt}{\dimexpr\hatchspread+0.15pt}}
+    \fi
+    \pgfsetstrokecolor{\hatchcolor}
+    \pgfsetdash{{1pt}{1pt}}{0pt}% dashing cannot work correctly in all situation this way
+    \pgfusepath{stroke}
+   }
+% % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%===============================================================================
+
+
+\title{Title here}
+%
+
+%\markboth{IEEE Transactions on Automatic Control}{}
+
+%\IEEEpubid{0000--0000/00\$00.00~\copyright~2015 IEEE}
+
+\author{Pablo R. Baldivieso-Monasterios$^{1}$
+\thanks{P.R. Baldivieso-Monasterios is with the Department of Automatic Control \& Systems Engineering, University of Sheffield, Sheffield, UK {\tt\small \{p.baldivieso\}@sheffield.ac.uk}.}
+}
+\begin{document}
+	%
+\maketitle
+		%
+\begin{abstract}            
+stuff happens here
+\end{abstract}
+%
+
+\section{Introduction}
+\label{sec:introduction}
+
+\cite{Limon2009}
+%\newcommand{\myreferences}{/Users/Pablo/Dropbox/Reports/library}
+%\newcommand{\myreferences}{/Users/prbalm/Dropbox/Reports/library.bib}
+%\newcommand{\myreferences}{extracted}
+%\newcommand{\myreferences}{library}
+
+\begin{figure}[b!]
+  \centering
+  \input{figs/figure.tikz}
+  \caption{trial}
+  \label{fig:trial}
+\end{figure}
+
+\bibliography{extracted}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,116 @@
+% This file was created by matlab2tikz.
+% Minimal pgfplots version: 1.3
+%
+\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500}%
+\definecolor{mycolor4}{rgb}{0.49400,0.18400,0.55600}%
+\definecolor{mycolor5}{rgb}{0.46600,0.67400,0.18800}%
+\definecolor{mycolor6}{rgb}{0.30100,0.74500,0.93300}%
+\definecolor{mycolor7}{rgb}{0.63500,0.07800,0.18400}%
+%
+\begin{tikzpicture}
+
+
+\begin{axis}[%
+width=0.4\linewidth,
+height=0.6\linewidth,
+at={(0\linewidth,0\linewidth)},
+scale only axis,
+xmin=0,
+xmax=2,
+ymin=0,
+ymax=7,
+axis x line*=bottom,
+axis y line*=left,
+xmajorgrids,
+ymajorgrids,
+xlabel={$x_{d,l}$ [\si{\volt}]},
+xtick={  0, 0.5, 1, 1.5},
+ylabel={$x_{q,l}$ [\si{\volt}]},
+legend style={legend cell align=left,align=left,draw=white!15!black}
+]
+
+\addplot[area legend,solid,line width=1.0pt,fill=red,draw=black]
+table[row sep=crcr] {%
+x	y	z\\
+0.538001295287672	0.628344671185063	\\
+0.492384649139163	0.633740803488589	\\
+0.44678160003676	0.639136835572078	\\
+0.401192135986202	0.644532767523937	\\
+0.355616245010898	0.649928599432442	\\
+0.310053915151885	0.655324331385739	\\
+0.264505134467795	0.660719963471844	\\
+0.218969891034816	0.666115495778645	\\
+0.173448172946662	0.671510928393899	\\
+0.127939968314528	0.676906261405236	\\
+0.213424740000106	1.35918535295086	\\
+0.301953292663312	2.04144200963536	\\
+0.393530537543134	2.72367619525937	\\
+0.488161576362579	3.40588787221951	\\
+0.585851702864203	4.08807700149709	\\
+0.686606404409384	4.77024354264627	\\
+0.79043136364249	5.45238745378189	\\
+0.897332460221152	6.13450869156663	\\
+1.00731577261388	6.81660721119777	\\
+1.41778191248323	6.76804263721459	\\
+}--cycle;\label{fig:eq_1}
+
+\end{axis}
+
+\begin{axis}[%
+width=0.4\linewidth,
+height=0.6\linewidth,
+at={(0.4\linewidth,0.0\linewidth)},
+scale only axis,
+%every outer x axis line/.append style={white!10!black},
+%every x tick label/.append style={font=\color{white!10!black}},
+%legend style={draw=none,at={(0.6,1.30)},anchor=north,legend columns=-1},
+xmin=309,
+xmax=312,
+ymin=-2,
+ymax=5,
+%xmin=0,
+%xmax=100,
+%xtick={  0, 15, 25, 45, 65 ,90, 100},
+%tick align=outside,
+%xlabel={$u_{d,l}$ [\si{\ampere}]},
+%ylabel={$u_{q,l}$ [\si{\ampere}]},
+xmajorgrids,
+%every outer y axis line/.append style={white!10!black},
+%every y tick label/.append style={font=\color{white!10!black}},
+%ymin=-50,
+%ymax=80,
+%ytick={-50,0,70},
+%yticklabels={$-S_b$,$0$,$Sb$,$S_w$},
+ymajorgrids,
+axis x line*=bottom,
+axis y line*=right
+]
+
+\addplot[area legend,solid,line width=1.0pt,fill=blue,draw=black, fill opacity = 0.5]
+table[row sep=crcr] {%
+x	y\\
+310.95642599536	-0.248305512318877\\
+311.034888028568	-0.931793010062459\\
+311.110306280799	-1.61525807294492	\\
+311.064723489924	-1.61998199962041\\
+311.019127185594	-1.62470582669197	\\
+310.973517355918	-1.62942955407199	\\
+310.927893988992	-1.63415318167271	\\
+310.882257072891	-1.63887670940623	\\
+310.836606595673	-1.64360013718455	\\
+310.79094254538	-1.64832346491951	\\
+310.745264910035	-1.65304669252285	\\
+310.699573677644	-1.65776981990614	\\
+309.910391735543	4.49422960391711	\\
+310.321529151594	4.53673836711531	\\
+310.421445944532	3.85309273231837	\\
+310.518280521655	3.16946981567502	\\
+310.612038961434	2.48586957238255	\\
+310.702727143524	1.80229195910366	\\
+310.790350750571	1.11873693395314	\\
+310.874915269935	0.435204456485197	\\
+}--cycle;\label{fig:eq_2}
+\end{axis}
+\end{tikzpicture}%
